@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 
-function First_screen() {
+function Login() {
   return (
     <View style={{ backgroundColor: "#00CCF9", flex: 100 }}>
       <View
@@ -60,5 +60,4 @@ function First_screen() {
     </View>
   );
 }
-
-export default First_screen;
+export default Login;
