@@ -4,16 +4,8 @@ import Login from "./src/ui/Login";
 import Login1a from "./src/ui/Login1a";
 import Login1b from "./src/ui/Login1b";
 import Login1c from "./src/ui/Login1c";
+import Login1d from "./src/ui/Login1d";
 
 export default function App() {
-  return <Login1c />;
+  return <Login1d />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
