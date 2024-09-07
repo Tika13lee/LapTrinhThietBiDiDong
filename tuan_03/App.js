@@ -6,7 +6,8 @@ import Login1b from "./src/ui/Login1b";
 import Login1c from "./src/ui/Login1c";
 import Login1d from "./src/ui/Login1d";
 import Login1e from "./src/ui/Login1e";
+import Login2a from "./src/ui/Login2a";
 
 export default function App() {
-  return <Login1e />;
+  return <Login2a />;
 }
