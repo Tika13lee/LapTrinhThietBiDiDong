@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-function Login1e() {
+function Login2a() {
   return (
     <LinearGradient
       colors={["#FBCB00", "#BF9A00"]}
@@ -92,4 +92,4 @@ function Login1e() {
   );
 }
 
-export default Login1e;
+export default Login2a;
