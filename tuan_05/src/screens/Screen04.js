@@ -96,9 +96,6 @@ export default function Screen04({ route }) {
             paddingLeft: 60,
             height: 34,
           }}
-          onPress={() => {
-            navigation.navigate("ChooseColor");
-          }}
         >
           <Text
             style={{
