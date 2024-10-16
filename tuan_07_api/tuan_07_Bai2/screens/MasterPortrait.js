@@ -11,6 +11,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useState, useEffect } from "react";
+import Spin from "./Spin";
 
 export default function MasterPortrait({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -19,13 +20,12 @@ export default function MasterPortrait({ navigation }) {
 
   const getProduct = async () => {
     try {
-      if (title === "Donut") {
-        const response = await fetch(
-          "https://67038e71ab8a8f8927309934.mockapi.io/api/products/Product"
-        );
-        const json = await response.json();
-        setData(json);
-      }
+      setLoading(true);
+      const response = await fetch(
+        `https://6705ca47031fd46a8310f310.mockapi.io/${title}`
+      );
+      const json = await response.json();
+      setData(json);
     } catch (error) {
       console.error(error);
     } finally {
@@ -35,7 +35,7 @@ export default function MasterPortrait({ navigation }) {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [title]);
 
   const renderItem = ({ item }) => {
     return (
@@ -58,7 +58,7 @@ export default function MasterPortrait({ navigation }) {
             <Text style={{ fontSize: 20, fontWeight: "700" }}>{item.name}</Text>
             <Text>Spicy tasty donut family</Text>
             <Text style={{ fontSize: 20, fontWeight: "700" }}>
-              {item.price.toLocaleString("en-US", {
+              {item?.price?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "USD",
               })}
@@ -82,6 +82,7 @@ export default function MasterPortrait({ navigation }) {
         marginTop: 40,
       }}
     >
+      <Spin />
       <View style={{ marginBottom: 25 }}>
         <Text
           style={{
