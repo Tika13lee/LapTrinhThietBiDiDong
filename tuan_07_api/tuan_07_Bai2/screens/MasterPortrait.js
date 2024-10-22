@@ -11,21 +11,35 @@ import {
   StyleSheet,
 } from "react-native";
 import { useState, useEffect } from "react";
-import Spin from "./Spin";
+
+const apis = {
+  Donut: "https://6705ca47031fd46a8310f310.mockapi.io/Donut",
+  PinkDonut: "https://6705ca47031fd46a8310f310.mockapi.io/PinkDonut",
+  Floating: "https://6705ca47031fd46a8310f310.mockapi.io/Floating",
+};
 
 export default function MasterPortrait({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [title, setTitle] = useState("Donut");
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState(data);
 
-  const getProduct = async () => {
+  const handleSearch = (text) => {
+    setSearch(text);
+    const newData = data.filter((item) => {
+      return item.name.toLowerCase().includes(text.toLowerCase());
+    });
+    setFilteredData(newData);
+  };
+
+  const getProduct = async (apiUrl) => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `https://6705ca47031fd46a8310f310.mockapi.io/${title}`
-      );
+      const response = await fetch(apiUrl);
       const json = await response.json();
       setData(json);
+      setFilteredData(json);
     } catch (error) {
       console.error(error);
     } finally {
@@ -34,7 +48,7 @@ export default function MasterPortrait({ navigation }) {
   };
 
   useEffect(() => {
-    getProduct();
+    getProduct(apis[title]);
   }, [title]);
 
   const renderItem = ({ item }) => {
@@ -82,7 +96,6 @@ export default function MasterPortrait({ navigation }) {
         marginTop: 40,
       }}
     >
-      <Spin />
       <View style={{ marginBottom: 25 }}>
         <Text
           style={{
@@ -114,6 +127,8 @@ export default function MasterPortrait({ navigation }) {
             borderColor: "rgba(196, 196, 196, 1)",
             paddingLeft: 15,
           }}
+          value={search}
+          onChangeText={handleSearch}
         />
         <Image source={require("../assets/search.png")} />
       </View>
@@ -142,8 +157,8 @@ export default function MasterPortrait({ navigation }) {
           <ActivityIndicator />
         ) : (
           <FlatList
-            data={data}
-            keyExtractor={({ id }) => id}
+            data={filteredData}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
           />
